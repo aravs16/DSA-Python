@@ -68,6 +68,17 @@ def find_path(g,v,s):
     find_path(g,v.parent,s)
 
 
+def depth_first_search(g, s):
+    for v in s.get_connected_to():
+        if v.color == 'WHITE':
+            print(v.id)
+            v.color = 'GRAY'
+            v.parent = s
+            v.hop = s.hop+1
+            depth_first_search(g,v)
+        v.color = 'BLACK'
+
+
 
 g = Graph()
 g.add_edge(1,2)
@@ -77,9 +88,11 @@ g.add_edge(2,4)
 g.add_edge(4,6)
 g.add_edge(4,7)
 print(g.get_vertex_keys(), g.get_vertex(1))
-breadth_first_search(g,1)
+# breadth_first_search(g,1)
 print('-------------------------------')
-find_path(g,g.get_vertex(7),g.get_vertex(1))
+# find_path(g,g.get_vertex(7),g.get_vertex(1))
+print('-------------------------------')
+depth_first_search(g,g.get_vertex(1))
 
         
 
